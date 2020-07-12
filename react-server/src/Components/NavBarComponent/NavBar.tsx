@@ -16,12 +16,15 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             flexGrow: 1,
+            colorDefault: '#0c4038',
+            backgroundColor: '#000000'
         },
         menuButton: {
             marginRight: theme.spacing(2),
         },
         title: {
             flexGrow: 1,
+            justifyContent: 'center',
         },
     }),
 );
@@ -47,7 +50,7 @@ export const NavBar: FunctionComponent<any> = (props) => {
     
     if(currentUser){
         //if they are logged in, add the other items
-        menuItems.push(<MenuItem onClick={handleClose} key={'logout'}><Link to='/logout'>LogOut</Link></MenuItem>,
+        menuItems.push(<MenuItem selected classes={{ root: 'MenuItem', selected: 'selected' }} onClick={handleClose} key={'logout'}><Link to='/logout'>LogOut</Link></MenuItem>,
         <MenuItem onClick={handleClose}><Link to={`/profile/${(currentUser)?currentUser.userId : '0' }`}>My Profile</Link></MenuItem>)
     }
     if((currentUser && currentUser.role.role === 'admin') || (currentUser && currentUser.role.role === 'finance-manager')){
@@ -56,9 +59,9 @@ export const NavBar: FunctionComponent<any> = (props) => {
     }
 
     return (
-        <nav>
+        <nav className='nav'>
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar >
                     <IconButton onClick={handleClick} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>

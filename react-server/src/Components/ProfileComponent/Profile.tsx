@@ -1,29 +1,21 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import { UserDisplay } from '../UserDisplayComponent/UserDisplay';
-import { User } from '../../models/User';
-import { useParams} from 'react-router-dom'
-import { getUserById } from '../../remote/server-api/get-by-id';
+import { useSelector } from 'react-redux';
+import { IState } from '../../reducers';
+
 
 export const Profile:FunctionComponent<any> =  (props)=>{
-    let [userProfile, changeUserProfile] = useState<null | User>(null)
-    let {userId} = useParams()
-
-    useEffect(()=>{
-        let getUser = async ()=>{
-            let userInfo = await getUserById(userId)
-            changeUserProfile(userInfo)
-        }
-        if(!userProfile || userProfile.userId !== +userId){
-            getUser()
-        }
+    let currentUser = useSelector((state:IState)=>{
+        return state.loginState.currentUser
     })
     
-return (
-        (userProfile)?
-        <UserDisplay user={userProfile}/>
-        :
-        <div>
-            <h3>User Not Found</h3>
-        </div>
-    )
-}
+    return (
+            (currentUser)?
+            <UserDisplay user={currentUser}/>
+            :
+            <div>
+                <h3>Loading...</h3>
+            </div>
+
+        )
+    }

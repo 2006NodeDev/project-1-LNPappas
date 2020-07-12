@@ -1,27 +1,20 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
-import { getAllUsers } from '../../remote/server-api/get-all-users'
+import React, { FunctionComponent } from 'react'
 import { UserDisplay } from '../UserDisplayComponent/UserDisplay'
 import { User } from '../../models/User'
+import { useSelector } from 'react-redux'
+import { IState } from '../../reducers'
 
 export const AllUsers:FunctionComponent<any> = (props) => {
-
-    let [allUsers, changeAllUsers] = useState<User[]>([])
-
-    useEffect(()=>{
-        const getUsers = async ()=>{
-            let response = await getAllUsers()
-            changeAllUsers(response)
-        }
-        if(allUsers.length === 0){
-            getUsers()
-        }
+    const allUsers = useSelector((state:IState)=>{
+        return state.allUserState.userList
     })
-    let userDisplays = allUsers.map((user)=>{
+
+    let userDisplays = allUsers.map((user:User)=>{
         return <UserDisplay key={'user-key-' + user.userId} user={user}/>
     })
 
     return(
-        <div>
+        <div >
             {userDisplays}
         </div>
     )

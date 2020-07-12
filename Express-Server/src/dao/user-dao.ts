@@ -93,3 +93,23 @@ export async function updateOneUser(updatedUser:User):Promise<User>{
         client && client.release();
     }
 }
+
+export async function getNewUser(newUser:User):Promise<User>{
+    let client:PoolClient
+    try{
+        client = await connectionPool.connect()
+        console.log(`new user ${newUser.username}`);
+        
+        await client.query(`insert into ers.users("username","password","first_name", 
+                                "last_name", "email", "role")
+                                values	($1, $2, $3, $4, $5, $6)`, 
+                                [newUser.username, newUser.password, newUser.firstName, 
+                                newUser.lastName, newUser.email, newUser.role])
+        return getUserByUserNameAndPassword(newUser.username, newUser.password);
+    }catch(e){
+        console.log(e)
+        throw new Error('Unhandled Error Occured')
+    }finally{
+        client && client.release();
+    }
+}

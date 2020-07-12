@@ -1,5 +1,5 @@
 /*
-   
+   Express Router
 */ 
 
 import express, { Request, Response, NextFunction } from 'express';
@@ -8,6 +8,7 @@ import { AuthenticationFailureError } from './errors/AuthenticationFailureError'
 import { userRouter } from './routers/user-router';
 import { getUserByUserNameAndPassword } from './dao/user-dao';
 import { corsFilter } from './middleware/cors-filter';
+import { uploadRouter } from './routers/upload-router';
 
 // returns pre-build express app, must run first
 const app = express();
@@ -22,7 +23,7 @@ app.use(sessionMiddleware);
 
 // create router for /users
 app.use('/users', userRouter);
-
+app.use('/upload', uploadRouter);
 
 /*
     Login

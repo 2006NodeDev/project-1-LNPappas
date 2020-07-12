@@ -1,8 +1,9 @@
-
 import express, { Request, Response, NextFunction, response } from 'express';
 import { authenticationMiddleware } from '../middleware/authentication-middleware';
 import { authorizationMiddleware } from '../middleware/authorization-middleware';
-import { getAllUsers, getUsersById, updateOneUser } from '../dao/user-dao';
+import { getAllUsers, getUsersById, updateOneUser, getNewUser } from '../dao/user-dao';
+import { User } from '../models/User';
+
 
 export const userRouter = express.Router();
 
@@ -92,5 +93,22 @@ userRouter.patch('/', authorizationMiddleware(['admin']), async (req:Request, re
         } catch (error) {
             next(error);
         }
+    }
+})
+
+userRouter.post('/',  async (req:Request, res:Response, next:NextFunction) => {
+    try {
+        let user = new User();
+        user.username = req.body.username
+        user.password = req.body.password
+        user.firstName = req.body.firstName
+        user.lastName = req.body.lastName
+        user.email = req.body.email
+        user.role = req.body.role.roleId
+
+        let newUser = await getNewUser(user);
+        res.json(newUser)
+    } catch (error) {
+        next(error);
     }
 })

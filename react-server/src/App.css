@@ -1,38 +1,52 @@
-.App {
-  text-align: center;
+.app{
+    display: 'flex';
+    justify-content:'center';
+    align-items: 'center';
+}
+.body{
+    min-height: 100vh;
+    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(./Pictures/pp_background.png);
+    background-color: #000000;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.MuiPaper-elevation4{
+    color: #0c4038;
+    background-color: #000000;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary{
+    background-color: #000000;
+    color: #0c4038;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.login{
+    align-items: center;
+    justify-content: space-around;
+    background-color: #0c4038;
+    border: 2px solid #0c4038;
+    padding: 2px;
+}
+.form_login{
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0c4038;
+    border: 2px solid #0c4038;
+    padding: 2px;
 }
 
-.App-link {
-  color: #61dafb;
-}
+.display{
+    background-color: #000000;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
+/* .MuiInputBase-input.MuiInput-input{
+    justify-content: center;
+    align-items: center;
+} */
+/* .MuiInputBase-input.MuiInput-input{
+    background-color: #0c4038;
+    color: #000000;
+} */
