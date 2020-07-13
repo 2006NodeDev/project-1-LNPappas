@@ -83,6 +83,9 @@ userRouter.patch('/', authorizationMiddleware(['admin']), async (req:Request, re
             if(req.body.email){
                 user.email = req.body.email;
             }
+            if(req.body.description){
+                user.description = req.body.description;
+            }
             if (req.body.role){
                 user.role.roleId = req.body.role.roleId;
             }
@@ -104,6 +107,7 @@ userRouter.post('/',  async (req:Request, res:Response, next:NextFunction) => {
         user.firstName = req.body.firstName
         user.lastName = req.body.lastName
         user.email = req.body.email
+        user.description = req.body.description
         user.role = req.body.role.roleId
 
         let newUser = await getNewUser(user);

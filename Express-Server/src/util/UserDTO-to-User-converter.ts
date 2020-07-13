@@ -10,7 +10,8 @@ export function UserDTOtoUserConvertor( dto:UserDTO ):User{
         password: dto.password,
         firstName: dto.first_name,
         lastName: dto.last_name, 
-        email: dto.email, 
+        email: dto.email,
+        description: dto.description, 
         role
     }
 }
