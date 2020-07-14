@@ -11,5 +11,6 @@ export interface User {
     firstName: string // not null
     lastName: string // not null
     email: string // not null
+    description: string
     role: Role // not null
 }

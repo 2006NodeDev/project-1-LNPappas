@@ -21,7 +21,7 @@ header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrim
 
 .MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary{
     background-color: #000000;
-    color: #0c4038;
+    color: #116e46;
 }
 
 .login{
@@ -42,6 +42,11 @@ header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrim
 .display{
     background-color: #000000;
 
+}
+
+MenuItem{
+    background-color: #000000;
+    color: #919191;
 }
 /* .MuiInputBase-input.MuiInput-input{
     justify-content: center;

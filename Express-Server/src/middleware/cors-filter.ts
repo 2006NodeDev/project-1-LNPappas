@@ -10,7 +10,6 @@ export function corsFilter(req:Request, res:Response, next:NextFunction) {
     if(req.method === 'OPTIONS'){
         res.sendStatus(200) // sends back options pre-flight request
     } else{
-        console.log("CORS: denied")
         next() // allows real requests to go to endpoint
     }
 }

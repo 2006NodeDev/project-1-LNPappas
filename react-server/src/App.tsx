@@ -21,11 +21,10 @@ function App() {
           <NavBar />
           <Route path='/login' render={(props) => (<Login {...props} />)} />
           <Route path='/profile/:userId' component={Profile} />
-          <Route path='/users' component={AllUsers} />
-          <Route path='/edituser' component={EditUser} />
+          <Route path='/users' component={AllUsers}/>
+          <Route path='/edituser' component={EditUser}/>
         </Router>
-        <div className="body">
-        </div>
+        <div className="body"></div>
         <ToastContainer position='bottom-right'/>
         </div>
       </Provider>

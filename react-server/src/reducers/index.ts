@@ -2,9 +2,8 @@ import { combineReducers } from "redux";
 import { User } from "../models/User";
 import { loginReducer } from "./login-reducer";
 import { allUserReducer } from "./allUsers-reducer";
-// import { idUserReducer } from "./idUsers-reducer";
+import { editUserReducer } from "./editUsers-reducer";
 
-//interface for login
 export interface ILoginState{
     currentUser:User,
     errorMessage:string
@@ -15,7 +14,7 @@ export interface IAllUsersState{
     errorMessage:string
 }
 
-export interface IidUsersState{
+export interface IeditUsersState{
     user:User,
     errorMessage:string
 }
@@ -23,12 +22,12 @@ export interface IidUsersState{
 export interface IState{
     loginState:ILoginState,
     allUserState:IAllUsersState,
-    // idUserState:IidUsersState,
+    editUserState:IeditUsersState,
 }
 
 export const state = combineReducers<IState>({
     loginState:loginReducer,
     allUserState:allUserReducer,
-    // idUserState:idUserReducer,
+    editUserState:editUserReducer,
 })
  

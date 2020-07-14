@@ -9,12 +9,16 @@ import { userRouter } from './routers/user-router';
 import { getUserByUserNameAndPassword } from './dao/user-dao';
 import { corsFilter } from './middleware/cors-filter';
 import { uploadRouter } from './routers/upload-router';
+import { loggingMiddleWare } from './middleware/logging-middleware';
 
 // returns pre-build express app, must run first
 const app = express();
 
 // middleware: body-parser, only parses json
 app.use(express.json());
+
+// middleware: logging
+app.use(loggingMiddleWare)
 
 //middleware: cors filter
 app.use(corsFilter);

@@ -1,24 +1,24 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
 // import { sendUploadToGCS } from '../middleware/google-cloud-storage'
 // const Multer = require('multer');
 // const bodyParser = require('body-parser')
 // import { uploadImage } from '../middleware/google-cloud-storage'
 
 export const uploadRouter = express.Router();
-const multer = require('multer')
-const storage = multer.memoryStorage()
-const upload = multer({ storage: storage })
+// const multer = require('multer')
+// const storage = multer.memoryStorage()
+// const upload = multer({ storage: storage })
 
-uploadRouter.post('/', upload.single('image'), async (req:Request, res:Response, next:NextFunction)=>{
-    try {
-        const image = req['file'].buffer
-        if(image){
-            console.log('got it!');
-        }
-    } catch (error) {
-        console.log(error);
-    }
-})
+// uploadRouter.post('/', upload.single('image'), async (req:Request, res:Response, next:NextFunction)=>{
+//     try {
+//         const image = req['file'].buffer
+//         if(image){
+//             console.log('got it!');
+//         }
+//     } catch (error) {
+//         console.log(error);
+//     }
+// })
 
 // uploadRouter.post('/',
 //     sendUploadToGCS,

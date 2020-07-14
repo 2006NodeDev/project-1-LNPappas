@@ -12,6 +12,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { useSelector } from 'react-redux';
+import { IState } from '../../reducers';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,9 +44,18 @@ export const UserDisplay:FunctionComponent<any> = (props)=>{
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
+  let currentUser = useSelector((state:IState)=>{
+    return state.loginState.currentUser
+  })
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  
+  let changeRoute = () => {
+    props.history.push('/edituser');
+  }
+  
   return (
     <div className='display'>
       <Card className={classes.root}>
@@ -55,9 +66,12 @@ export const UserDisplay:FunctionComponent<any> = (props)=>{
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings" onClick={props.history.push('/edituser')}>
+            (currentUser.username === props.user.username)?
+            <IconButton aria-label="settings" onClick={changeRoute}>
               <MoreVertIcon />
             </IconButton>
+            :
+            null
           }
           title={`${props.user.firstName} ${props.user.lastName}`}
           subheader={props.user.role.role}
@@ -88,11 +102,11 @@ export const UserDisplay:FunctionComponent<any> = (props)=>{
           <CardContent>
             <Typography paragraph>About: {props.user.username}</Typography>
             <Typography paragraph>
-              Description
+              {props.user.description}
             </Typography>
           </CardContent>
         </Collapse>
       </Card>
     </div>
-  );
+  )
 }

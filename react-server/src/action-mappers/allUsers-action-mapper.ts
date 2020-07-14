@@ -35,10 +35,3 @@ export const allUsersActionMapper = () => async (dispatch:any) =>{
         }
     }
 }
-        // const getUsers = async ()=>{
-        //     let response = await getAllUsers()
-        //     changeAllUsers(response)
-        // }
-        // if(allUsers.length === 0){
-        //     getUsers()
-        // }

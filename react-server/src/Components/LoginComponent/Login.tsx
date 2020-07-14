@@ -38,7 +38,7 @@ export const Login:FunctionComponent<any> = (props) => {
         let thunk = LoginActionMapper(username, password)
         dispatch(thunk)
         getUsers()
-        props.history.push(`/profile/${props.userId}`)
+        // props.history.push(`/profile/${props.userId}`)
     }
 
     useEffect(()=>{

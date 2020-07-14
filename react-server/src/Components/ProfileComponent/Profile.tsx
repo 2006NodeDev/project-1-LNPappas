@@ -11,11 +11,10 @@ export const Profile:FunctionComponent<any> =  (props)=>{
     
     return (
             (currentUser)?
-            <UserDisplay user={currentUser}/>
+            <UserDisplay user={currentUser} {...props}/>
             :
             <div>
                 <h3>Loading...</h3>
             </div>
-
         )
     }
