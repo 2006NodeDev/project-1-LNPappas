@@ -1,16 +1,7 @@
 import { serverClient } from "."
+import { User } from "../../models/User";
 
-export const editUser = async (username:string, password:string, firstName: string, lastName:string, email:string, description:string) =>{
-    let role = 1
-    let edit = {
-        username,
-        password,
-        firstName,
-        lastName,
-        email,
-        description,
-        role
-    }
+export const editUser = async (edit:User) =>{
     try {
         let response = await serverClient.patch('/users', edit)
         console.log(response);

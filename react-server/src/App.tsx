@@ -10,6 +10,7 @@ import { Profile } from './Components/ProfileComponent/Profile';
 import { AllUsers } from './Components/AllUsersComponent/AllUsers';
 import './App.css'
 import { EditUser } from './Components/EditUserComponent/EditUser';
+import { NewUser } from './Components/newUserComponent/NewUser';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/profile/:userId' component={Profile} />
           <Route path='/users' component={AllUsers}/>
           <Route path='/edituser' component={EditUser}/>
+          <Route path='/new' component={NewUser}/>
         </Router>
         <div className="body"></div>
         <ToastContainer position='bottom-right'/>

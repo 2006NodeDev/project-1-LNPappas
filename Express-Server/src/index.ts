@@ -6,7 +6,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { sessionMiddleware } from './middleware/session-middleware';
 import { AuthenticationFailureError } from './errors/AuthenticationFailureError';
 import { userRouter } from './routers/user-router';
-import { getUserByUserNameAndPassword } from './dao/user-dao';
+import { getUserByUserNameAndPassword } from './dao/SQL/user-dao';
 import { corsFilter } from './middleware/cors-filter';
 import { uploadRouter } from './routers/upload-router';
 import { loggingMiddleWare } from './middleware/logging-middleware';

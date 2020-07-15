@@ -11,7 +11,8 @@ export function UserDTOtoUserConvertor( dto:UserDTO ):User{
         firstName: dto.first_name,
         lastName: dto.last_name, 
         email: dto.email,
-        description: dto.description, 
+        description: dto.description,
+        image: dto.image, 
         role
     }
 }

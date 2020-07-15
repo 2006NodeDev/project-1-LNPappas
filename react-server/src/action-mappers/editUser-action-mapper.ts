@@ -1,4 +1,5 @@
 import {editUser} from '../remote/server-api/edit-user'
+import { User } from '../models/User'
 
 export const editUserTypes = {
     SUCCESSFUL_LOGIN: 'P1_SUCCESSFUL_EDIT_USER',
@@ -6,9 +7,9 @@ export const editUserTypes = {
     BAD_REQUEST: 'P1_EDIT_USER_BAD_REQUEST',
     BAD_CREDENTIALS: 'P1_EDIT_USER_BAD_CREDENTIALS',
 }
-export const editUserActionMapper = (username:string, password:string, firstName:string, lastName:string, email:string, description:string) => async (dispatch:any) => {
+export const editUserActionMapper = (changedUser:User) => async (dispatch:any) => {
     try {
-        let user = await editUser(username, password, firstName, lastName, email, description)
+        let user = await editUser(changedUser)
         dispatch({
             type:editUserTypes.SUCCESSFUL_LOGIN,
             payload:{

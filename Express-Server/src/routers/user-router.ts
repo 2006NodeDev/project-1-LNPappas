@@ -1,13 +1,11 @@
 import express, { Request, Response, NextFunction, response } from 'express';
 import { authenticationMiddleware } from '../middleware/authentication-middleware';
 import { authorizationMiddleware } from '../middleware/authorization-middleware';
-import { getAllUsers, getUsersById, updateOneUser, getNewUser } from '../dao/user-dao';
+import { getAllUsers, getUsersById, updateOneUser, getNewUser } from '../dao/SQL/user-dao';
 import { User } from '../models/User';
 
 
 export const userRouter = express.Router();
-
-userRouter.use(authenticationMiddleware); // authenticates user
 
 /*
     Find User
@@ -17,7 +15,7 @@ userRouter.use(authenticationMiddleware); // authenticates user
         Response: User
 */
 
-userRouter.get('/', authorizationMiddleware(['admin', 'finance-manager']), async (req:Request, res:Response, next:NextFunction)=>{
+userRouter.get('/', authenticationMiddleware, authorizationMiddleware(['admin', 'finance-manager']), async (req:Request, res:Response, next:NextFunction)=>{
     try {
         let allUsers = await getAllUsers();
         res.json(allUsers);
@@ -33,7 +31,7 @@ userRouter.get('/', authorizationMiddleware(['admin', 'finance-manager']), async
         Allowed Roles: admin, finance-manager
         Response: User
 */
-userRouter.get('/:id', authorizationMiddleware (['admin', 'finance-manager', 'current']), async (req:Request, res:Response, next:NextFunction)=>{
+userRouter.get('/:id', authenticationMiddleware, authorizationMiddleware (['admin', 'finance-manager', 'current']), async (req:Request, res:Response, next:NextFunction)=>{
     let {id} = req.params;
     if(isNaN(+id)){
         res.status(400).send("ID must be a number");
@@ -58,7 +56,7 @@ userRouter.get('/:id', authorizationMiddleware (['admin', 'finance-manager', 'cu
                 undefined will not be updated
         Response: User
 */
-userRouter.patch('/', authorizationMiddleware(['admin']), async (req:Request, res:Response, next:NextFunction)=>{
+userRouter.patch('/', authenticationMiddleware, authorizationMiddleware(['admin']), async (req:Request, res:Response, next:NextFunction)=>{
     let {userId} = req.body;
     if(!userId){
         throw response.status(404).send('User not found')
@@ -86,6 +84,9 @@ userRouter.patch('/', authorizationMiddleware(['admin']), async (req:Request, re
             if(req.body.description){
                 user.description = req.body.description;
             }
+            if(req.body.image){
+                user.image = req.body.image;
+            }
             if (req.body.role){
                 user.role.roleId = req.body.role;
             }
@@ -108,6 +109,7 @@ userRouter.post('/',  async (req:Request, res:Response, next:NextFunction) => {
         user.lastName = req.body.lastName
         user.email = req.body.email
         user.description = req.body.description
+        user.image = req.body.image || undefined
         user.role.roleId = req.body.role
 
         let newUser = await getNewUser(user);

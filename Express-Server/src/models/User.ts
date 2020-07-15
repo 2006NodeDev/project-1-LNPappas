@@ -12,5 +12,6 @@ export class User {
     lastName: string // not null
     email: string // not null
     description: string
+    image?:string
     role: Role // not null
 }
