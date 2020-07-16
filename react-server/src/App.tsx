@@ -10,7 +10,7 @@ import { Profile } from './Components/ProfileComponent/Profile';
 import { AllUsers } from './Components/AllUsersComponent/AllUsers';
 import './App.css'
 import { EditUser } from './Components/EditUserComponent/EditUser';
-import { NewUser } from './Components/newUserComponent/NewUser';
+import { NewUser } from './Components/NewUserComponent/NewUser';
 
 
 function App() {

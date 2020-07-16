@@ -8,14 +8,13 @@ import { AuthenticationFailureError } from './errors/AuthenticationFailureError'
 import { userRouter } from './routers/user-router';
 import { getUserByUserNameAndPassword } from './dao/SQL/user-dao';
 import { corsFilter } from './middleware/cors-filter';
-import { uploadRouter } from './routers/upload-router';
 import { loggingMiddleWare } from './middleware/logging-middleware';
 
 // returns pre-build express app, must run first
 const app = express();
 
 // middleware: body-parser, only parses json
-app.use(express.json());
+app.use(express.json({limit:'50mb'}));
 
 // middleware: logging
 app.use(loggingMiddleWare)
@@ -27,7 +26,6 @@ app.use(sessionMiddleware);
 
 // create router for /users
 app.use('/users', userRouter);
-app.use('/upload', uploadRouter);
 
 /*
     Login

@@ -3,11 +3,13 @@ import { TextField } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 import { User } from "../../models/User";
 import { newUserServer } from "../../remote/server-api/new-user";
+import { toast } from "react-toastify";
 
 export const NewUser:FunctionComponent<any> = (props) => {
 
     let[username, changeUsername] = useState('')
     let[password, changePassword] = useState('')
+    let[confirmPassword, changeConfirmPassword] = useState('')
     let[firstName, changeFirstName] = useState('')
     let[lastName, changeLastName] = useState('')
     let[email, changeEmail] = useState('')
@@ -22,6 +24,11 @@ export const NewUser:FunctionComponent<any> = (props) => {
     const updatePassword = (e:any) => {
         e.preventDefault()
         changePassword(e.currentTarget.value)
+    }
+
+    const updateConfirmPassword = (e:any) => {
+        e.preventDefault()
+        changeConfirmPassword(e.currentTarget.value)
     }
 
     const updateFirstName = (e:any) => {
@@ -50,13 +57,15 @@ export const NewUser:FunctionComponent<any> = (props) => {
         let reader = new FileReader()
         reader.readAsDataURL(file)
         reader.onload = () => {
-            console.log(reader.result);
             changeImage(reader.result)
         }
     }
 
     const submitUser = async (e:SyntheticEvent) => {
         e.preventDefault()
+        if(password !== confirmPassword){
+            toast.error('Passwords Do Not Match')
+        }
         let newUser:User = {
             userId:0,
             username,
@@ -80,16 +89,15 @@ export const NewUser:FunctionComponent<any> = (props) => {
             <form onSubmit={submitUser}>
                 <TextField label='username' value={username} onChange={updateUsername}></TextField>
                 <TextField label='password' type='password' value={password} onChange={updatePassword}></TextField>
-                <TextField label='password' type='confirm password' value={password} onChange={updatePassword}></TextField>
+                <TextField label='password' type='confirm password' value={confirmPassword} onChange={updateConfirmPassword}></TextField>
                 <TextField label='firstName' value={firstName} onChange={updateFirstName}></TextField>
                 <TextField label='lastName' value={lastName} onChange={updateLastName}></TextField>
                 <TextField label='email' value={email} onChange={updateEmail}></TextField>
                 <TextField label='description' value={description} onChange={updateDescription}></TextField>
                 <label htmlFor='file'>Profile Pic</label>
                 <input type='file' name='file' accept='image/*' onChange={updateImage}/>
-                <img src={image}/>
+                <img src={image} alt={require('../../Pictures/noimage.png')}/>
                 <Button variant="contained" type='submit'>Submit</Button>
-
             </form>
         </div>
     )

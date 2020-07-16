@@ -1,8 +1,9 @@
 import express, { Request, Response, NextFunction, response } from 'express';
 import { authenticationMiddleware } from '../middleware/authentication-middleware';
 import { authorizationMiddleware } from '../middleware/authorization-middleware';
-import { getAllUsers, getUsersById, updateOneUser, getNewUser } from '../dao/SQL/user-dao';
+import { getAllUsers, getUsersById } from '../dao/SQL/user-dao';
 import { User } from '../models/User';
+import { saveNewUserService, editUserService } from '../services/user-services'
 
 
 export const userRouter = express.Router();
@@ -88,10 +89,10 @@ userRouter.patch('/', authenticationMiddleware, authorizationMiddleware(['admin'
                 user.image = req.body.image;
             }
             if (req.body.role){
-                user.role.roleId = req.body.role;
+                user.role.roleId = req.body.role.roleId;
             }
-
-            let updatedUser = await updateOneUser(user);
+            
+            let updatedUser = await editUserService(user);
             res.json(updatedUser);
 
         } catch (error) {
@@ -109,11 +110,12 @@ userRouter.post('/',  async (req:Request, res:Response, next:NextFunction) => {
         user.lastName = req.body.lastName
         user.email = req.body.email
         user.description = req.body.description
-        user.image = req.body.image || undefined
-        user.role.roleId = req.body.role
+        user.image = req.body.image || 'none'
+        user.role = req.body.role
 
-        let newUser = await getNewUser(user);
+        let newUser = await saveNewUserService(user)
         res.json(newUser)
+
     } catch (error) {
         next(error);
     }

@@ -6,24 +6,23 @@ import Button from '@material-ui/core/Button'
 import { editUserActionMapper } from '../../action-mappers/editUser-action-mapper'
 import { User } from '../../models/User'
 
-export const EditUser:FunctionComponent<any> =  (props)=>{
+export const EditUser:FunctionComponent<any> = (props)=>{
 
     let currentUser = useSelector((state:IState)=>{
         return state.loginState.currentUser
     })
 
-    const [username, changeUsername] = useState(currentUser.username)
-    const [password, changePassword] = useState(currentUser.password)
-    const [firstName, changeFirstName] = useState(currentUser.firstName)
-    const [lastName, changeLastName] = useState(currentUser.lastName)
-    const [email, changeEmail] = useState(currentUser.email)
-    const [description, changeDescription] = useState(currentUser.description)
+    const [username, changeUsername] = useState('')
+    const [password, changePassword] = useState('')
+    const [firstName, changeFirstName] = useState('')
+    const [lastName, changeLastName] = useState('')
+    const [email, changeEmail] = useState('')
+    const [description, changeDescription] = useState('')
     const [image, changeImage] = useState(undefined)
 
     const updateUsername = (event:any) => {
         event.preventDefault()
-        
-        if (event.currentTarget.value){
+        if (event.currentTarget.value !== undefined){
             changeUsername(event.currentTarget.value)
         } else {
             changeUsername(currentUser.username)
@@ -32,45 +31,41 @@ export const EditUser:FunctionComponent<any> =  (props)=>{
 
     const updatePassword = (event:any) => {
         event.preventDefault()
-        if (event.currentTarget.value){
+        if (event.currentTarget.value !== undefined){
             changePassword(event.currentTarget.value)
-        }else{
+        } else {
             changePassword(currentUser.password)
         }
     }
 
     const updateFirstName = (event:any) => {
         event.preventDefault()
-        if (event.currentTarget.value !== ''){
+        if (event.currentTarget.value !== undefined){
             changeFirstName(event.currentTarget.value)
-        }else{
+        } else{
             changeFirstName(currentUser.firstName)
         }
     }
 
     const updateLastName = (event:any) => {
         event.preventDefault()
-        if (event.currentTarget.value){
+        if (event.currentTarget.value !== ''){
             changeLastName(event.currentTarget.value)
-        }else {
-            changeLastName(currentUser.lastName)
         }
     }
 
     const updateEmail = (event:any) => {
         event.preventDefault()
-        if (event.currentTarget.value){
+        if (event.currentTarget.value !== ''){
             changeEmail(event.currentTarget.value)
-        }else {
-            changeEmail(currentUser.email)
         }
     }
 
     const updateDescription = (event:any) => {
         event.preventDefault()
-        if (event.currentTarget.value){
+        if (event.currentTarget.value !== ''){
             changeDescription(event.currentTarget.value)
-        } else{
+        } else {
             changeDescription(currentUser.description)
         }
     }
@@ -102,18 +97,15 @@ export const EditUser:FunctionComponent<any> =  (props)=>{
         }
         let thunk = editUserActionMapper(user)
         dispatch(thunk)
-        (currentUser.role.roleId === 1)?
-        props.history.push(`/users`)
-        :
         props.history.push(`/profile/${currentUser.userId}`)
     }
 
-    let editItems = [<TextField id="username" label={currentUser.username} value={username || ''} onChange={updateUsername}/>,
+    let editItems = [<TextField id="username" label="username" value={username || ''} onChange={updateUsername}/>,
                         <TextField id="password" type='password' label="Password" value={password || ''} onChange={updatePassword}/>,
-                        <TextField id="firstName" label={currentUser.firstName} value={firstName || ''} onChange={updateFirstName}/>,
-                        <TextField id="lastName" label={currentUser.lastName} value={lastName || ''} onChange={updateLastName}/>,
+                        <TextField id="firstName" label="first name" value={firstName || ''} onChange={updateFirstName}/>,
+                        <TextField id="lastName" label="last name" value={lastName || ''} onChange={updateLastName}/>,
                         <TextField id="description" label="description" value={description || ''} onChange={updateDescription}/>,
-                        <TextField id="email" label={currentUser.email} value={email || ''} onChange={updateEmail}/>, 
+                        <TextField id="email" label="email" value={email || ''} onChange={updateEmail}/>, 
                         <label htmlFor='file'>Profile Pic</label>,
                         <input type='file' name='file' accept='image/*' onChange={updateImage}/>,
                         <img src={image} alt={require('../../Pictures/noimage.png')}/>]

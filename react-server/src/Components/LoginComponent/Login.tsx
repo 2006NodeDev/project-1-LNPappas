@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LoginActionMapper, loginErrorReset } from '../../action-mappers/login-action-mapper'
 import { IState } from '../../reducers'
 import { toast } from 'react-toastify'
-import { allUsersActionMapper } from '../../action-mappers/allUsers-action-mapper'
+// import { allUsersActionMapper } from '../../action-mappers/allUsers-action-mapper'
 
 
 export const Login:FunctionComponent<any> = (props) => {
@@ -28,17 +28,16 @@ export const Login:FunctionComponent<any> = (props) => {
         event.preventDefault()
         changePassword(event.currentTarget.value)
     }
-    const getUsers = async ()=>{
-        let thunk = allUsersActionMapper()
-        dispatch(thunk)
-    };
+    // const getUsers = async ()=>{
+    //     let thunk = allUsersActionMapper()
+    //     dispatch(thunk)
+    // };
 
     const loginSubmit = async (e:SyntheticEvent) => {
         e.preventDefault()
         let thunk = LoginActionMapper(username, password)
         dispatch(thunk)
-        getUsers()
-        // props.history.push(`/profile/${props.userId}`)
+        // getUsers()
     }
 
     useEffect(()=>{
@@ -46,6 +45,9 @@ export const Login:FunctionComponent<any> = (props) => {
             toast.error(errorMessage)
             dispatch(loginErrorReset())
         }
+        // } else if (username !== '') {
+        //     props.history.push(`/profile/${props.user.userId}`)
+        // }
     })
 
     return (

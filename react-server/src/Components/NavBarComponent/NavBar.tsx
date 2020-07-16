@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -46,13 +45,16 @@ export const NavBar: FunctionComponent<any> = (props) => {
     };
 
     //always have the login item
-    let menuItems = [<MenuItem onClick={handleClose} key={'login'}><Link to='/login'>Login</Link></MenuItem>]
+    let menuItems = [<MenuItem onClick={handleClose} key={'login'}><Link to='/login'>Login</Link></MenuItem>, 
+                        <MenuItem onClick={handleClose} key={'newUser'}><Link to='/new'>Create Account</Link></MenuItem>]
     
     if(currentUser){
         //if they are logged in, add the other items
+        menuItems = []
         menuItems.push(<MenuItem selected classes={{ root: 'MenuItem', selected: 'selected' }} onClick={handleClose} key={'logout'}><Link to='/logout'>LogOut</Link></MenuItem>,
         <MenuItem onClick={handleClose}><Link to={`/profile/${(currentUser)?currentUser.userId : '0' }`}>My Profile</Link></MenuItem>)
     }
+
     if((currentUser && currentUser.role.role === 'admin') || (currentUser && currentUser.role.role === 'finance-manager')){
         menuItems.push(<MenuItem onClick={handleClose}><Link to='/users'>All Users</Link></MenuItem>)
         // ,<MenuItem onClick={handleClose}><Link to='/users'>Get User By ID</Link></MenuItem>)
