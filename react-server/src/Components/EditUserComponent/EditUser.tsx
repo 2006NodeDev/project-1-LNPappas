@@ -7,6 +7,7 @@ import { editUserActionMapper } from '../../action-mappers/editUser-action-mappe
 import { User } from '../../models/User'
 import { makeStyles } from '@material-ui/core/styles';
 import { LoginActionMapper } from '../../action-mappers/login-action-mapper'
+import '../../App.css'
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -133,15 +134,15 @@ export const EditUser:FunctionComponent<any> = (props)=>{
                         <TextField className={classes.textField} id="lastName" label="last name" value={lastName || ''} onChange={updateLastName}/>,
                         <TextField className={classes.textField} id="description" label="description" value={description || ''} onChange={updateDescription}/>,
                         <TextField className={classes.textField} id="email" label="email" value={email || ''} onChange={updateEmail}/>,<br/>, 
-                        <label htmlFor='file'>Profile Pic   </label>,
+                        <br/>,<label className={classes.textField} htmlFor='file'>Profile Pic   </label>,
                         <input type='file' name='file' accept='image/*' onChange={updateImage}/>,
-                        <img className={classes.media} src={image || ''} alt=''/>]
+                        <img src={image || ''} alt=''/>]
  
     return (
         (currentUser)?
         <div className='edituser'>
             <form className='form_edituser' autoComplete="off" onSubmit={userSubmit}>
-                {editItems}
+                {editItems}<br />
                 <Button type='submit' variant="contained" color="primary">Update</Button>
             </form>
         </div>

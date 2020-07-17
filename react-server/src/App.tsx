@@ -8,15 +8,23 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { Profile } from './Components/ProfileComponent/Profile';
 import { AllUsers } from './Components/AllUsersComponent/AllUsers';
-// import './App.css'
+import './App.css'
 import { EditUser } from './Components/EditUserComponent/EditUser';
 import { NewUser } from './Components/NewUserComponent/NewUser';
 import { LogOut } from './Components/LogOutComponent/LogOut';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+  root:{
+      alignItems: 'center',
+      justifyContent: 'center'
+  }
+}))
 
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
+    <div className={classes.root}>
       <Provider store={store}>
         <Router >
           <NavBar />

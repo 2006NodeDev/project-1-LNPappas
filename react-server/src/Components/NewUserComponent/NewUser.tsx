@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core'
 import { User } from "../../models/User";
 import { newUserServer } from "../../remote/server-api/new-user";
 import { toast } from "react-toastify";
+import '../../App.css'
 
 const useStyles = makeStyles((theme) => ({
     root:{
@@ -123,11 +124,11 @@ export const NewUser:FunctionComponent<any> = (props) => {
                 <TextField className={classes.textField} label='firstName' value={firstName} onChange={updateFirstName}></TextField>
                 <TextField className={classes.textField} label='lastName' value={lastName} onChange={updateLastName}></TextField>
                 <TextField className={classes.textField} label='email' value={email} onChange={updateEmail}></TextField>
-                <TextField className={classes.textField} label='description' value={description} onChange={updateDescription}></TextField>
-                <label htmlFor='file'>Profile Pic   </label>
+                <TextField className={classes.textField} label='description' value={description} onChange={updateDescription}></TextField><br/><br/>
+                
+                <label className={classes.textField} htmlFor='file'>Profile Pic:     </label>
                 <input type='file' name='file' accept='image/*' onChange={updateImage}/>
-                <img className={classes.media}src={image || ''} alt=''/>
-
+                <img src={image || ''} alt=''/><br/>
                 <Button variant="contained" type='submit'>Submit</Button>
             </form>
         </div>

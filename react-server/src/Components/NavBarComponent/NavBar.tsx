@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { Link } from 'react-router-dom'
 import { IState } from '../../reducers';
 import { useSelector } from 'react-redux';
+import '../../App.css'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

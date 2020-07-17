@@ -3,6 +3,7 @@ import { Redirect } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginActionMapper } from "../../action-mappers/login-action-mapper";
 import { IState } from "../../reducers";
+import '../../App.css'
 
 export const LogOut:FunctionComponent<any> = (props) => {
     let dispatch = useDispatch()

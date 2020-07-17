@@ -3,6 +3,7 @@ import { UserDisplay } from '../UserDisplayComponent/UserDisplay';
 import { useSelector, useDispatch } from 'react-redux';
 import { IState } from '../../reducers';
 import { allUsersActionMapper } from '../../action-mappers/allUsers-action-mapper';
+import '../../App.css'
 
 
 export const Profile:FunctionComponent<any> =  (props)=>{
