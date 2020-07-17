@@ -1,0 +1,8 @@
+FROM node:12.18
+
+# COPY <- (best practice) new files/directories from source and copy to path
+COPY build "express-server/build"
+COPY node_modules "express-server/node_modules"
+COPY "unique-perigee-279818-52ded1e9a8b4.json" "\Users\wooho\OneDrive\Documents\Revature\example-project1_service_account_key" 
+
+CMD ["npm", "run", "deploy"]

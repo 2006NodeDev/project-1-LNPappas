@@ -117,13 +117,13 @@ export const NewUser:FunctionComponent<any> = (props) => {
     return(
         <div className={classes.root}>
             <form onSubmit={submitUser}>
-                <TextField className={classes.textField} label='username' value={username} onChange={updateUsername} margin='normal' InputProps={{className: classes.input, }}></TextField>
+                <TextField className={classes.textField} label='username' value={username} onChange={updateUsername} margin='normal'></TextField>
                 <TextField className={classes.textField} label='password' type='password' value={password} onChange={updatePassword}></TextField>
                 <TextField className={classes.textField} label='confirm password' type='password' value={confirmPassword} onChange={updateConfirmPassword}></TextField>
                 <TextField className={classes.textField} label='firstName' value={firstName} onChange={updateFirstName}></TextField>
                 <TextField className={classes.textField} label='lastName' value={lastName} onChange={updateLastName}></TextField>
                 <TextField className={classes.textField} label='email' value={email} onChange={updateEmail}></TextField>
-                <TextField className={classes.textField} label='description' value={description} onChange={updateDescription}></TextField><br/>
+                <TextField className={classes.textField} label='description' value={description} onChange={updateDescription}></TextField>
                 <label htmlFor='file'>Profile Pic   </label>
                 <input type='file' name='file' accept='image/*' onChange={updateImage}/>
                 <img className={classes.media}src={image || ''} alt=''/>

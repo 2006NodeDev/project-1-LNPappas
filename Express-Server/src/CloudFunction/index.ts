@@ -22,6 +22,7 @@ const messageTemplate = {
  */
 exports.newUserEmail = (event, context) => {
     let newUser = JSON.parse(Buffer.from(event.data, 'base64').toString())
+    console.log(newUser);
     messageTemplate.to = newUser.email
     transporter.sendMail()
   };
