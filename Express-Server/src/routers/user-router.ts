@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction, response } from 'express';
 import { authenticationMiddleware } from '../middleware/authentication-middleware';
 import { authorizationMiddleware } from '../middleware/authorization-middleware';
-import { getAllUsers, getUsersById } from '../dao/SQL/user-dao';
+import { getAllUsers, getUsersById, getNewUser } from '../dao/SQL/user-dao';
 import { User } from '../models/User';
 import { saveNewUserService, editUserService } from '../services/user-services'
 
@@ -57,7 +57,7 @@ userRouter.get('/:id', authenticationMiddleware, authorizationMiddleware (['admi
                 undefined will not be updated
         Response: User
 */
-userRouter.patch('/', authenticationMiddleware, authorizationMiddleware(['admin']), async (req:Request, res:Response, next:NextFunction)=>{
+userRouter.patch('/', authenticationMiddleware, async (req:Request, res:Response, next:NextFunction)=>{
     let {userId} = req.body;
     if(!userId){
         throw response.status(404).send('User not found')
@@ -91,7 +91,7 @@ userRouter.patch('/', authenticationMiddleware, authorizationMiddleware(['admin'
             if (req.body.role){
                 user.role.roleId = req.body.role.roleId;
             }
-            
+
             let updatedUser = await editUserService(user);
             res.json(updatedUser);
 
@@ -113,7 +113,13 @@ userRouter.post('/',  async (req:Request, res:Response, next:NextFunction) => {
         user.image = req.body.image || 'none'
         user.role = req.body.role
 
-        let newUser = await saveNewUserService(user)
+        let newUser:User;
+        if (user.image === 'none'){
+            newUser = await getNewUser(user)
+        } else{
+            newUser = await saveNewUserService(user)
+        }
+        
         res.json(newUser)
 
     } catch (error) {

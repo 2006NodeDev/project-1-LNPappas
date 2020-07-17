@@ -8,16 +8,16 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { Profile } from './Components/ProfileComponent/Profile';
 import { AllUsers } from './Components/AllUsersComponent/AllUsers';
-import './App.css'
+// import './App.css'
 import { EditUser } from './Components/EditUserComponent/EditUser';
 import { NewUser } from './Components/NewUserComponent/NewUser';
+import { LogOut } from './Components/LogOutComponent/LogOut';
 
 
 function App() {
   return (
     <div className="App">
       <Provider store={store}>
-      <div className="bar">
         <Router >
           <NavBar />
           <Route path='/login' render={(props) => (<Login {...props} />)} />
@@ -25,10 +25,9 @@ function App() {
           <Route path='/users' component={AllUsers}/>
           <Route path='/edituser' component={EditUser}/>
           <Route path='/new' component={NewUser}/>
+          <Route path='/logout' component={LogOut}/>
         </Router>
-        <div className="body"></div>
         <ToastContainer position='bottom-right'/>
-        </div>
       </Provider>
     </div>
   );

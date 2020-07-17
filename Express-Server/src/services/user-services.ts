@@ -2,6 +2,7 @@ import { User } from "../models/User";
 import { getAllUsers, getUsersById, getNewUser, updateOneUser, getUserByUserNameAndPassword } from "../dao/SQL/user-dao";
 import { saveProfilePicture } from "../dao/CloudStorage/user-Images";
 import { bucketBaseUrl } from "../dao/CloudStorage";
+import { expressEventEmitter, customExpressEvents } from "../event-listeners";
 
 export async function getAllUsersService():Promise<User[]>{
     return await getAllUsers()
@@ -47,6 +48,7 @@ export async function editUserService(updatedUser:User):Promise<User>{
         
         let savedUser =  await updateOneUser(updatedUser)
         saveProfilePicture(contentType, imagebase64Data, fileName)
+        expressEventEmitter.emit(customExpressEvents.NEW_USER, savedUser)
         return savedUser
         
     } catch (error) {

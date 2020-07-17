@@ -18,12 +18,16 @@ import { IState } from '../../reducers';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
-    backgroundColor: '#767676',
+    backgroundColor: '#ebf7fa',
     color: '#0b3f32',
   },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
+  },
+  imageMedia:{
+    maxWidth:"100%",
+    maxHeight:"100%",
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -78,7 +82,7 @@ export const UserDisplay:FunctionComponent<any> = (props)=>{
         />
         <CardMedia
           className={classes.media}
-          image={require('../../Pictures/noimage.png')}
+          image={props.user.image || require('../../Pictures/noimage.png')}
           title={props.user.username}
         />
         <CardContent>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LoginActionMapper, loginErrorReset } from '../../action-mappers/login-action-mapper'
 import { IState } from '../../reducers'
 import { toast } from 'react-toastify'
+import { Redirect } from 'react-router'
 // import { allUsersActionMapper } from '../../action-mappers/allUsers-action-mapper'
 
 
@@ -15,6 +16,10 @@ export const Login:FunctionComponent<any> = (props) => {
 
     const errorMessage = useSelector((state:IState) => {
         return state.loginState.errorMessage
+    })
+
+    let currentUser = useSelector((state:IState)=>{
+        return state.loginState.currentUser
     })
 
     const dispatch = useDispatch();
@@ -28,29 +33,24 @@ export const Login:FunctionComponent<any> = (props) => {
         event.preventDefault()
         changePassword(event.currentTarget.value)
     }
-    // const getUsers = async ()=>{
-    //     let thunk = allUsersActionMapper()
-    //     dispatch(thunk)
-    // };
 
     const loginSubmit = async (e:SyntheticEvent) => {
         e.preventDefault()
         let thunk = LoginActionMapper(username, password)
         dispatch(thunk)
-        // getUsers()
-    }
+    }       
 
     useEffect(()=>{
         if(errorMessage){
             toast.error(errorMessage)
             dispatch(loginErrorReset())
         }
-        // } else if (username !== '') {
-        //     props.history.push(`/profile/${props.user.userId}`)
-        // }
     })
 
     return (
+        (currentUser)?
+        <Redirect to={`/profile/${currentUser.userId}`}/>
+        :
         <div className='login'>
             <form className='form_login' autoComplete="off" onSubmit={loginSubmit}>
                 <TextField id="username" label="Username" value={username} onChange={updateUsername}/>

@@ -9,6 +9,8 @@ import { userRouter } from './routers/user-router';
 import { getUserByUserNameAndPassword } from './dao/SQL/user-dao';
 import { corsFilter } from './middleware/cors-filter';
 import { loggingMiddleWare } from './middleware/logging-middleware';
+import '../src/event-listeners/new-user'
+import './CloudFunction'
 
 // returns pre-build express app, must run first
 const app = express();

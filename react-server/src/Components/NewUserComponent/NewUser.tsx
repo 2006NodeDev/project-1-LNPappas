@@ -1,9 +1,37 @@
 import React, { FunctionComponent, SyntheticEvent, useState } from "react";
+import { makeStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 import { User } from "../../models/User";
 import { newUserServer } from "../../remote/server-api/new-user";
 import { toast } from "react-toastify";
+
+const useStyles = makeStyles((theme) => ({
+    root:{
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    media:{
+        height: 0,
+        paddingTop: '56.25%',
+        maxWidth: "400px",
+        maxHeight: "400px",
+    },
+    textField: {
+        alignSelf: 'center',
+        width: '50%',
+        marginLeft: 'auto',
+        marginRight: 'auto',            
+        paddingBottom: 0,
+        paddingRight: 1,
+        paddingLeft:2,
+        marginTop: 0,
+        fontWeight: 500
+    },
+    input: {
+        color: 'white'
+    }
+}))
 
 export const NewUser:FunctionComponent<any> = (props) => {
 
@@ -15,6 +43,8 @@ export const NewUser:FunctionComponent<any> = (props) => {
     let[email, changeEmail] = useState('')
     let[description, changeDescription] = useState('')
     let[image, changeImage] = useState(undefined)
+
+    const classes = useStyles();
 
     const updateUsername = (e:any) => {
         e.preventDefault()
@@ -76,7 +106,7 @@ export const NewUser:FunctionComponent<any> = (props) => {
             description,
             image,
             role: {
-                roleId: 1,
+                roleId: 3,
                 role: 'user'
             }
         }
@@ -85,18 +115,19 @@ export const NewUser:FunctionComponent<any> = (props) => {
     }
 
     return(
-        <div>
+        <div className={classes.root}>
             <form onSubmit={submitUser}>
-                <TextField label='username' value={username} onChange={updateUsername}></TextField>
-                <TextField label='password' type='password' value={password} onChange={updatePassword}></TextField>
-                <TextField label='password' type='confirm password' value={confirmPassword} onChange={updateConfirmPassword}></TextField>
-                <TextField label='firstName' value={firstName} onChange={updateFirstName}></TextField>
-                <TextField label='lastName' value={lastName} onChange={updateLastName}></TextField>
-                <TextField label='email' value={email} onChange={updateEmail}></TextField>
-                <TextField label='description' value={description} onChange={updateDescription}></TextField>
-                <label htmlFor='file'>Profile Pic</label>
+                <TextField className={classes.textField} label='username' value={username} onChange={updateUsername} margin='normal' InputProps={{className: classes.input, }}></TextField>
+                <TextField className={classes.textField} label='password' type='password' value={password} onChange={updatePassword}></TextField>
+                <TextField className={classes.textField} label='confirm password' type='password' value={confirmPassword} onChange={updateConfirmPassword}></TextField>
+                <TextField className={classes.textField} label='firstName' value={firstName} onChange={updateFirstName}></TextField>
+                <TextField className={classes.textField} label='lastName' value={lastName} onChange={updateLastName}></TextField>
+                <TextField className={classes.textField} label='email' value={email} onChange={updateEmail}></TextField>
+                <TextField className={classes.textField} label='description' value={description} onChange={updateDescription}></TextField><br/>
+                <label htmlFor='file'>Profile Pic   </label>
                 <input type='file' name='file' accept='image/*' onChange={updateImage}/>
-                <img src={image} alt={require('../../Pictures/noimage.png')}/>
+                <img className={classes.media}src={image || ''} alt=''/>
+
                 <Button variant="contained" type='submit'>Submit</Button>
             </form>
         </div>

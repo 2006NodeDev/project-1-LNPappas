@@ -5,11 +5,15 @@ export const loginTypes = {
     BAD_CREDENTIALS: 'P1_BAD_CREDENTIALS',
     INTERNAL_SERVER: 'P1_LOGIN_INTERNAL_SERVER',
     BAD_REQUEST: 'P1_LOGIN_BAD_REQUEST',
-    RESET_ERROR: 'P1_RESET_ERROR'
+    RESET_ERROR: 'P1_RESET_ERROR',
+    USER_LOGOUT: 'USER_LOGOUT'
 }
 
 export const LoginActionMapper = (username:string, password:string) => async (dispatch:any) => {
     try{
+        if (username === 'logout'){
+            throw Error('logout') 
+        }
         let currentUser = await serverLogin(username,password)
         dispatch({
             type:loginTypes.SUCCESSFUL_LOGIN,
@@ -26,7 +30,11 @@ export const LoginActionMapper = (username:string, password:string) => async (di
             dispatch({
                 type:loginTypes.BAD_CREDENTIALS
             })
-        }else {
+        }else if (e.message === 'logout'){
+            dispatch({
+                type:loginTypes.USER_LOGOUT
+            })
+        } else {
             dispatch({
                 type:loginTypes.INTERNAL_SERVER
             })

@@ -40,6 +40,12 @@ export const loginReducer = (state= initialState, action:AnyAction) => {
                 errorMessage:''
             }
         }
+        case loginTypes.USER_LOGOUT:{
+            return {
+                currentUser:undefined,
+                errorMessage: ''
+            }
+        }
         default:{
             return state
         }

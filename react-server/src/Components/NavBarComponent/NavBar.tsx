@@ -57,7 +57,6 @@ export const NavBar: FunctionComponent<any> = (props) => {
 
     if((currentUser && currentUser.role.role === 'admin') || (currentUser && currentUser.role.role === 'finance-manager')){
         menuItems.push(<MenuItem onClick={handleClose}><Link to='/users'>All Users</Link></MenuItem>)
-        // ,<MenuItem onClick={handleClose}><Link to='/users'>Get User By ID</Link></MenuItem>)
     }
 
     return (

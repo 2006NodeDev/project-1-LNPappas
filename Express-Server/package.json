@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/2006NodeDev/project-1-LNPappas#readme",
   "dependencies": {
+    "@google-cloud/pubsub": "^2.2.0",
     "@google-cloud/storage": "^5.1.2",
     "body-parser": "^1.19.0",
     "crypto": "^1.0.1",
@@ -26,6 +27,7 @@
     "express-session": "^1.17.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
+    "nodemailer": "^6.4.10",
     "pg": "^8.3.0"
   },
   "jest": {
