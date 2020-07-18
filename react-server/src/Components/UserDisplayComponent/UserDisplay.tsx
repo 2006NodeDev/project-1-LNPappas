@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '56.25%', // 16:9
   },
   imageMedia:{
-    maxWidth:"100%",
-    maxHeight:"100%",
+    // maxWidth:"100%",
+    // maxHeight:"100%",
   },
   expand: {
     transform: 'rotate(0deg)',

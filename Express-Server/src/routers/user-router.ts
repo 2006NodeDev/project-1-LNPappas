@@ -4,6 +4,7 @@ import { authorizationMiddleware } from '../middleware/authorization-middleware'
 import { getAllUsers, getUsersById, getNewUser } from '../dao/SQL/user-dao';
 import { User } from '../models/User';
 import { saveNewUserService, editUserService } from '../services/user-services'
+import { expressEventEmitter, customExpressEvents } from '../event-listeners';
 
 
 export const userRouter = express.Router();
@@ -116,6 +117,7 @@ userRouter.post('/',  async (req:Request, res:Response, next:NextFunction) => {
         let newUser:User;
         if (user.image === 'none'){
             newUser = await getNewUser(user)
+            expressEventEmitter.emit(customExpressEvents.NEW_USER, newUser)
         } else{
             newUser = await saveNewUserService(user)
         }

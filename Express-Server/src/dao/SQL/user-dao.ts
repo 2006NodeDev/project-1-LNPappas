@@ -105,8 +105,8 @@ export async function getNewUser(newUser:User):Promise<User>{
                                 newUser.lastName, newUser.email, newUser.description, newUser.image, newUser.role.roleId])
         return getUserByUserNameAndPassword(newUser.username, newUser.password);
     }catch(e){
-        console.log(e)
-        throw new Error('Unhandled Error Occured getNewUser()')
+        console.log('Username unavailable')
+        throw new Error('Username unavailable')
     }finally{
         client && client.release();
     }
