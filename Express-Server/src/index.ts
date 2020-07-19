@@ -28,6 +28,10 @@ app.use(sessionMiddleware);
 // create router for /users
 app.use('/users', userRouter);
 
+app.get('/health', (req:Request, res:Response)=>{
+    res.sendStatus(200);
+})
+
 /*
     Login
         URL: /login
