@@ -11,7 +11,7 @@ export const imageBucket = new Storage().bucket(bucketName)
 
 const corsConfiguration = [
     {
-        "origin": ["https://storage.googleapis.com/project1.lnpappas.com", "project1.lnpappas.com"],
+        "origin": ["http://project1.lnpappas.com", "http://project1-service.lnpappas.com/" ],
         "method": ["GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS"],
         "responseHeader": ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"]
     }
