@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useState, SyntheticEvent } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { IState } from "../../reducers"
 import { TextField } from '@material-ui/core'
@@ -94,7 +94,7 @@ export const EditUser:FunctionComponent<any> = (props)=>{
     }
 
     const updateImage = (e:any) => {
-        // e.preventDefault()
+        e.preventDefault()
         let file:File = e.currentTarget.files[0]
         let reader = new FileReader()
         reader.readAsDataURL(file)
@@ -106,7 +106,8 @@ export const EditUser:FunctionComponent<any> = (props)=>{
 
     const dispatch = useDispatch();
     
-    let userSubmit = async () => {
+    let userSubmit = async (e:SyntheticEvent) => {
+        e.preventDefault()
         let user:User = {
             userId:currentUser.userId,
             username,
@@ -118,13 +119,17 @@ export const EditUser:FunctionComponent<any> = (props)=>{
             image,
             role:currentUser.role
         }
-        let thunk = editUserActionMapper(user)
-        dispatch(thunk)
-        
+        try {
+            let thunk = editUserActionMapper(user)
+            dispatch(thunk)
+            
+            let thunk2 = LoginActionMapper(username, password)
+            dispatch(thunk2)
 
-        let thunk2 = LoginActionMapper(username, password)
-        dispatch(thunk2)
-
+        } catch (error) {
+            console.log(error);
+            console.log('React server Edit User'); 
+        }
         props.history.push(`/profile/${currentUser.userId}`)
     }
 

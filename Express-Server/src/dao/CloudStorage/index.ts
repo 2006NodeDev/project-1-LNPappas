@@ -11,15 +11,20 @@ export const imageBucket = new Storage().bucket(bucketName)
 
 const corsConfiguration = [
     {
-        "origin": ["http://project1.lnpappas.com", "http://project1-service.lnpappas.com/" ],
+        "origin": ["http://project1.lnpappas.com"],
         "method": ["GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS"],
         "responseHeader": ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"]
     }
 ]
-imageBucket.setCorsConfiguration(corsConfiguration)
-// imageBucket.setCorsConfiguration(corsConfiguration).then(function(data) {
-//     const apiResponse = data[0];
-//     console.log(apiResponse);
-    
-//   });
+// imageBucket.setCorsConfiguration(corsConfiguration)
+try{
+    imageBucket.setCorsConfiguration(corsConfiguration).then(function(data) {
+        const apiResponse = data[0];
+        console.log(apiResponse);
+        
+      });
+} catch (e){
+    console.log(e)
+}
+
 //https://googleapis.dev/nodejs/storage/latest/global.html#CreateWriteStreamOptions

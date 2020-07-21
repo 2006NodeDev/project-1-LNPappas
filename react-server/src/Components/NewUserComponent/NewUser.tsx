@@ -83,7 +83,7 @@ export const NewUser:FunctionComponent<any> = (props) => {
     }
 
     const updateImage = (e:any) => {
-        // e.preventDefault()
+        e.preventDefault()
         let file:File = e.currentTarget.files[0]
         let reader = new FileReader()
         reader.readAsDataURL(file)
@@ -111,7 +111,13 @@ export const NewUser:FunctionComponent<any> = (props) => {
                 role: 'user'
             }
         }
-        await newUserServer(newUser)
+        try{
+            await newUserServer(newUser)
+        } catch (e) {
+            console.log(e)
+            console.log('React Server NewUser.tsx');
+        }
+
         props.history.push(`/login`)
     }
 
