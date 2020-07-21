@@ -6,7 +6,10 @@ export const bucketName = 'project1.lnpappas.com';
 
 export const bucketBaseUrl = `https://storage.googleapis.com/${bucketName}`
 
-export const imageBucket = new Storage().bucket(bucketName)
+export const imageBucket = new Storage({
+    projectId: "unique-perigee-279818",
+    keyFilename: "key.json"
+}).bucket(bucketName)
 
 const corsConfiguration = [
     {
