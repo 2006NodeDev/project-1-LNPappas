@@ -105,7 +105,7 @@ export const UserDisplay:FunctionComponent<any> = (props)=>{
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>About: {props.user.username}</Typography>
-            <Typography variant="body2" paragraph>
+            <Typography paragraph>
               {props.user.description}
             </Typography>
           </CardContent>
