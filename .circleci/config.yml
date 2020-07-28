@@ -6,17 +6,17 @@ jobs:
     steps:
       - checkout
         - run: 
-            working_directory: ~/project/Express-Server
+            working_directory: ~/Express-Server
             name: Install
             command: |
                 npm install
         - run: 
-            working_directory: ~/project/Express-Server
+            working_directory: ~/Express-Server
             name: Test
             command: |
               npm test
         - run: 
-            working_directory: ~/project/Express-Server
+            working_directory: ~/Express-Server
             name: Build
             command: |
               npm run build
