@@ -62,7 +62,7 @@ export const UserDisplay:FunctionComponent<any> = (props)=>{
   
   return (
     <div className='display'>
-      <Card className={classes.root}>
+      <Card className={classes.root}> 
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
@@ -105,7 +105,7 @@ export const UserDisplay:FunctionComponent<any> = (props)=>{
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>About: {props.user.username}</Typography>
-            <Typography paragraph>
+            <Typography variant="body2" paragraph>
               {props.user.description}
             </Typography>
           </CardContent>

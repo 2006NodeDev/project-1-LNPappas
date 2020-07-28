@@ -1,0 +1,26 @@
+version: 2.1
+jobs:
+  build-user-service:
+    docker:
+    - image: circleci/node@12.18.2
+    steps:
+      - checkout
+        - run: 
+            working_directory: ~/project/Express-Server
+            name: Install
+            command: |
+                npm install
+        - run: 
+            working_directory: ~/project/Express-Server
+            name: Test
+            command: |
+              npm test
+        - run: 
+            working_directory: ~/project/Express-Server
+            name: Build
+            command: |
+              npm run build
+workflows:
+    build-and-test:
+      jobs:
+        - build-user-service
